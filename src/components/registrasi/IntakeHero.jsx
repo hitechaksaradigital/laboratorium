@@ -1,4 +1,4 @@
-export default function IntakeHero() {
+export default function IntakeHero({ onPrint, onDraft, onConfirm, saving }) {
   return (
     <div className="mb-space-lg flex flex-col justify-between gap-space-md xl:flex-row xl:items-center">
       <div className="flex flex-col gap-space-xs">
@@ -21,17 +21,17 @@ export default function IntakeHero() {
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-space-sm self-start xl:self-auto">
-        <button className="flex h-9 items-center gap-space-xs rounded-lg bg-surface-container-lowest px-space-md font-label-lg text-label-lg text-on-surface shadow-sm transition-colors hover:bg-surface-container-high" type="button">
+        <button onClick={onPrint} className="flex h-9 items-center gap-space-xs rounded-lg bg-surface-container-lowest px-space-md font-label-lg text-label-lg text-on-surface shadow-sm transition-colors hover:bg-surface-container-high" type="button">
           <span className="material-symbols-outlined text-[18px] text-primary">print</span>
           <span>Cetak Label Barcode/QR</span>
         </button>
-        <button className="flex h-9 items-center gap-space-xs rounded-lg bg-surface-container-lowest px-space-md font-label-lg text-label-lg text-on-surface-variant shadow-sm transition-colors hover:bg-surface-container-high hover:text-on-surface" type="button">
+        <button onClick={onDraft} className="flex h-9 items-center gap-space-xs rounded-lg bg-surface-container-lowest px-space-md font-label-lg text-label-lg text-on-surface-variant shadow-sm transition-colors hover:bg-surface-container-high hover:text-on-surface" type="button">
           <span className="material-symbols-outlined text-[18px]">bookmark_border</span>
           <span>Simpan Draft</span>
         </button>
-        <button className="flex h-9 items-center gap-space-xs rounded-lg bg-primary px-space-lg font-label-lg text-label-lg text-on-primary shadow-md transition-all hover:bg-primary-container" type="button">
+        <button onClick={onConfirm} disabled={saving} className="flex h-9 items-center gap-space-xs rounded-lg bg-primary px-space-lg font-label-lg text-label-lg text-on-primary shadow-md transition-all hover:bg-primary-container disabled:opacity-60" type="button">
           <span className="material-symbols-outlined text-[18px]">verified</span>
-          <span>Konfirmasi &amp; Terbitkan ID Unik</span>
+          <span>{saving ? 'Menyimpan...' : 'Konfirmasi & Terbitkan ID Unik'}</span>
         </button>
       </div>
     </div>
