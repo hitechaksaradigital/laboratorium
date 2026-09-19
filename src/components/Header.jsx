@@ -1,4 +1,8 @@
-export default function Header({ query, onQuery }) {
+export default function Header({ query, onQuery, user, onSignOut }) {
+  const displayName =
+    user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Pengguna Lab'
+  const role = user?.email || 'Akun terverifikasi'
+  const initial = (displayName?.trim()?.[0] || 'U').toUpperCase()
   return (
     <header className="fixed left-0 right-0 top-0 z-40 flex h-16 items-center justify-between bg-surface/90 px-gutter shadow-card backdrop-blur-xl lg:left-72 lg:px-gutter-desktop">
       <div className="flex max-w-2xl flex-1 items-center gap-space-lg">
@@ -43,16 +47,24 @@ export default function Header({ query, onQuery }) {
         <div className="mx-space-xs hidden h-6 w-px bg-surface-container-high sm:block" />
         <div className="flex items-center gap-space-sm">
           <div className="hidden flex-col text-right sm:flex">
-            <span className="font-label-lg text-label-lg leading-tight text-on-surface">
-              Dr. Anjali Sharma, M.Sc
+            <span className="font-label-lg text-label-lg max-w-[220px] truncate leading-tight text-on-surface">
+              {displayName}
             </span>
-            <span className="font-body-sm text-body-sm leading-tight text-on-surface-variant">
-              Senior Lab Analyst
+            <span className="font-body-sm text-body-sm max-w-[220px] truncate leading-tight text-on-surface-variant">
+              {role}
             </span>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
-            <span className="material-symbols-outlined text-[18px] text-on-primary">person</span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-[13px] font-bold text-on-primary">
+            {initial}
           </div>
+          <button
+            onClick={onSignOut}
+            title="Keluar"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-surface-container-lowest text-on-surface-variant shadow-card transition-colors hover:bg-error-container hover:text-on-error-container"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[20px]">logout</span>
+          </button>
         </div>
       </div>
     </header>

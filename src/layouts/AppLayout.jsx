@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 import Sidebar from '../components/Sidebar.jsx'
 import Header from '../components/Header.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 
 const PATH_TO_NAV = {
   '/': 'dashboard-and-lab-ops',
@@ -33,6 +34,7 @@ export default function AppLayout() {
   const [query, setQuery] = useState('')
   const location = useLocation()
   const navigate = useNavigate()
+  const { user, signOut } = useAuth()
   const activePath = PATH_TO_NAV[location.pathname] || 'dashboard-and-lab-ops'
 
   return (
@@ -43,7 +45,15 @@ export default function AppLayout() {
         onNavigate={(navPath) => navigate(NAV_TO_PATH[navPath] || '/')}
       />
       <div className="lg:pl-72">
-        <Header query={query} onQuery={setQuery} />
+        <Header
+          query={query}
+          onQuery={setQuery}
+          user={user}
+          onSignOut={async () => {
+            await signOut()
+            navigate('/login')
+          }}
+        />
         <Outlet context={{ query }} />
       </div>
     </div>
