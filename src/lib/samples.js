@@ -19,6 +19,11 @@ export async function fetchSamples(limit = 50) {
 
 export async function createSample({ form, checks, items }) {
   needDb()
+  const company = (form.company || '').trim()
+  const sampleName = (form.sampleName || '').trim()
+  if (!company || !sampleName) {
+    throw new Error('Nama Perusahaan dan Nama Sampel wajib diisi admin.')
+  }
   const volume = form.volume === '' ? null : Number(String(form.volume).replace(',', '.'))
   const temp = form.temp === '' ? null : Number(String(form.temp).replace(',', '.'))
   const subtotal = items.reduce((a, b) => a + (b.price || 0), 0)
@@ -27,22 +32,22 @@ export async function createSample({ form, checks, items }) {
   const { data: sample, error } = await supabase
     .from('samples')
     .insert({
-      company: form.company,
-      contract_no: form.contract,
-      contact_person: form.contact,
-      coa_email: form.email,
-      sample_name: form.sampleName,
-      matrix_category: form.matrix,
+      company,
+      contract_no: (form.contract || '').trim() || null,
+      contact_person: (form.contact || '').trim() || null,
+      coa_email: (form.email || '').trim() || null,
+      sample_name: sampleName,
+      matrix_category: (form.matrix || '').trim() || null,
       volume: Number.isFinite(volume) ? volume : null,
       volume_unit: 'mL',
-      container: form.container,
+      container: (form.container || '').trim() || null,
       temp_celsius: Number.isFinite(temp) ? temp : null,
       check_seal: !!checks.seal,
       check_cold_chain: !!checks.coldChain,
       check_label: !!checks.label,
       check_preservasi: !!checks.preservasi,
-      sampled_at: new Date('2025-10-24T08:30:00+07:00').toISOString(),
-      sampling_location: 'Main Tank B4 - Bandung Plant',
+      sampled_at: new Date().toISOString(),
+      sampling_location: null,
       subtotal_idr: subtotal,
       param_count: items.length,
       accredited_count: accredited,
@@ -64,15 +69,8 @@ export async function createSample({ form, checks, items }) {
   }
 
   const now = new Date()
-  const at = (h, m) => {
-    const d = new Date(now)
-    d.setHours(h, m, 0, 0)
-    return d.toISOString()
-  }
   const { error: cocErr } = await supabase.from('coc_events').insert([
-    { sample_id: sample.id, step_no: 1, title: 'Diterima oleh Petugas Penerimaan', holder: 'Budi Santoso (Staff Sample Reception)', detail: 'Kondisi diterima, segel terverifikasi', event_at: at(10, 15) },
-    { sample_id: sample.id, step_no: 2, title: 'Penyimpanan Sementara (Cold Buffer)', holder: 'Cool Storage Rack B (Compartment #03)', detail: 'Sensor IoT log konstan', location: 'COLD STORAGE A-03', event_at: at(10, 45) },
-    { sample_id: sample.id, step_no: 3, title: 'Serah Terima ke Analis Kimia Instrumen', holder: 'Dr. Anjali Sharma, M.Sc', detail: 'Aktif', location: 'Lab Spektroskopi & Kromatografi Gedung B', event_at: at(11, 30) }
+    { sample_id: sample.id, step_no: 1, title: 'Diterima oleh Petugas Penerimaan', holder: null, detail: 'Registrasi awal oleh admin', event_at: now.toISOString() }
   ])
   if (cocErr) throw cocErr
 

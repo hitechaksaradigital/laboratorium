@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { HANDOVER_RECIPIENTS, LABEL_DEFAULTS } from '../../data/registrasi'
+import { HANDOVER_RECIPIENTS } from '../../data/registrasi'
 
 export default function HandoverModal({ open, onClose, onSubmit }) {
   const [recipient, setRecipient] = useState(HANDOVER_RECIPIENTS[0])
-  const [reason, setReason] = useState('Preparasi Media & Inokulasi Uji ALT ISO 4833')
+  const [reason, setReason] = useState('')
   const [pin, setPin] = useState('')
   if (!open) return null
   return (
@@ -24,8 +24,8 @@ export default function HandoverModal({ open, onClose, onSubmit }) {
         <div className="flex flex-col gap-space-md p-space-lg">
           <div className="flex flex-col gap-1 rounded-lg bg-surface-container-low p-space-sm">
             <span className="font-label-sm text-label-sm uppercase text-on-surface-variant">Sampel Ditransfer:</span>
-            <span className="font-mono font-semibold">{LABEL_DEFAULTS.sampleId}</span>
-            <span className="text-[11px] text-on-surface-variant">Dari: Dr. Anjali Sharma ke Penerima Baru</span>
+            <span className="font-mono font-semibold">— pilih dari daftar tersimpan —</span>
+            <span className="text-[11px] text-on-surface-variant">Kode sampel terbit setelah admin konfirmasi</span>
           </div>
           <label className="flex flex-col gap-1.5 text-[10px] uppercase text-on-surface-variant">
             Penerima Berikutnya
@@ -35,7 +35,7 @@ export default function HandoverModal({ open, onClose, onSubmit }) {
           </label>
           <label className="flex flex-col gap-1.5 text-[10px] uppercase text-on-surface-variant">
             Alasan Perpindahan
-            <input value={reason} onChange={(e) => setReason(e.target.value)} className="h-9 rounded-lg bg-surface-container-low px-space-md text-[14px] normal-case shadow-inner focus:outline-none focus:ring-1 focus:ring-primary" />
+            <input value={reason} placeholder="Contoh: Preparasi & inokulasi uji ALT" onChange={(e) => setReason(e.target.value)} className="h-9 rounded-lg bg-surface-container-low px-space-md text-[14px] normal-case shadow-inner focus:outline-none focus:ring-1 focus:ring-primary" />
           </label>
           <label className="flex flex-col gap-1.5 text-[10px] uppercase text-on-surface-variant">
             PIN Otorisasi Analis (6-Digit)

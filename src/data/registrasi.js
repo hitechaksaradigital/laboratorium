@@ -1,14 +1,14 @@
-export const INTAKE_DEFAULTS = {
-  company: 'PT Biofarmaka Nusantara Farma',
-  contract: 'KTR-2025/BFN-IV/0821',
-  contact: 'Ir. Wahyu Pratama (+62 811-2399-4012)',
-  email: 'qa-assurance@biofarmaka-nusantara.co.id',
-  sampleName: 'Ekstrak Cair Curcuma Purified Batch IV-A',
-  matrix: 'Bahan Baku Farmasi',
-  volume: '500',
+export const INTAKE_EMPTY = {
+  company: '',
+  contract: '',
+  contact: '',
+  email: '',
+  sampleName: '',
+  matrix: '',
+  volume: '',
   volumeUnit: 'mL',
-  container: 'Botol Kaca Amber + Segel Foil',
-  temp: '3.8'
+  container: '',
+  temp: ''
 }
 
 export const MATRIX_OPTIONS = [
@@ -19,10 +19,10 @@ export const MATRIX_OPTIONS = [
   'Tanah & Sedimen Geoteknik'
 ]
 
-export const INTEGRITY_DEFAULTS = {
-  seal: true,
-  coldChain: true,
-  label: true,
+export const INTEGRITY_EMPTY = {
+  seal: false,
+  coldChain: false,
+  label: false,
   preservasi: false
 }
 
@@ -65,11 +65,11 @@ export const PARAMETERS = [
   }
 ]
 
-export const LABEL_DEFAULTS = {
-  sampleId: 'SMP-2025-0892',
+export const LABEL_EMPTY = {
+  sampleId: '— (terbit otomatis saat konfirmasi) —',
   revision: 'R-01',
   location: 'COLD STORAGE A-03',
-  received: '24/10/25 10:15',
+  received: '—',
   printer: 'Zebra ZD621 (Direct Thermal - Online)'
 }
 
@@ -77,35 +77,34 @@ export const COC_STEPS = [
   {
     no: 1,
     title: 'Diterima oleh Petugas Penerimaan',
-    time: '10:15 WIB',
-    holder: 'Pemegang: Budi Santoso (Staff Sample Reception)',
-    note: 'Kondisi diterima dingin (3.8°C), segel pabrikan terverifikasi',
-    icon: 'done',
-    tone: 'done'
+    time: '—',
+    holder: 'Pemegang: — belum dicatat —',
+    note: 'Catat kondisi & segel saat penerimaan oleh admin',
+    icon: 'schedule',
+    tone: 'future'
   },
   {
     no: 2,
     title: 'Penyimpanan Sementara (Cold Buffer)',
-    time: '10:45 WIB',
-    holder: 'Fasilitas: Cool Storage Rack B (Compartment #03)',
-    note: 'Sensor IoT Log: 3.9°C konstan, RH 55%',
-    icon: 'done',
-    tone: 'done'
+    time: '—',
+    holder: 'Fasilitas: — belum dicatat —',
+    note: 'Catat rak & suhu penyimpanan oleh admin',
+    icon: 'schedule',
+    tone: 'future'
   },
   {
     no: 3,
-    title: 'Serah Terima ke Analis Kimia Instrumen',
-    time: '11:30 WIB',
-    holder: 'Pemegang Saat Ini: Dr. Anjali Sharma, M.Sc',
-    room: 'Ruang Pengujian: Lab Spektroskopi & Kromatografi Gedung B',
-    icon: 'biotech',
-    tone: 'active'
+    title: 'Serah Terima ke Analis',
+    time: '—',
+    holder: 'Pemegang Saat Ini: — belum diserahkan —',
+    icon: 'schedule',
+    tone: 'future'
   },
   {
     no: 4,
     title: 'Verifikasi Supervisor & Retensi Sampel',
-    time: 'Est. 27 Okt',
-    holder: 'Rencana Arsip: Retensi 30 Hari di Cold Vault C-01 setelah pengujian selesai',
+    time: '—',
+    holder: 'Rencana arsip dicatat setelah pengujian selesai',
     icon: 'schedule',
     tone: 'future'
   }

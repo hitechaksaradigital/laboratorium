@@ -1,9 +1,10 @@
-import { BARCODE_BARS, LABEL_DEFAULTS } from '../../data/registrasi'
+import { BARCODE_BARS, LABEL_EMPTY } from '../../data/registrasi'
 
 export default function LabelPreview({ form }) {
-  const id = LABEL_DEFAULTS.sampleId
-  const name = form.sampleName || LABEL_DEFAULTS.sampleId
-  const company = form.company || '-'
+  const hasSample = Boolean(form.sampleName?.trim() || form.company?.trim())
+  const id = LABEL_EMPTY.sampleId
+  const name = form.sampleName?.trim() || '— belum diisi admin —'
+  const company = form.company?.trim() || '— belum diisi admin —'
   return (
     <section className="relative flex flex-col gap-space-md rounded-xl bg-surface-container-lowest p-space-lg shadow-sm">
       <div className="flex items-center justify-between gap-2">
@@ -34,10 +35,18 @@ export default function LabelPreview({ form }) {
           </div>
           <div className="grid grid-cols-12 items-center gap-space-sm py-2">
             <div className="col-span-8 flex flex-col gap-1">
-              <svg className="h-12 w-full text-on-surface" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 240 50">
-                {BARCODE_BARS.map(([x, w]) => (<rect key={x} x={x} y="0" width={w} height="42" />))}
-              </svg>
-              <div className="text-center font-mono text-[10px] leading-none tracking-widest">*{id}*</div>
+              {hasSample ? (
+                <>
+                  <svg className="h-12 w-full text-on-surface" fill="currentColor" preserveAspectRatio="none" viewBox="0 0 240 50">
+                    {BARCODE_BARS.map(([x, w]) => (<rect key={x} x={x} y="0" width={w} height="42" />))}
+                  </svg>
+                  <div className="text-center font-mono text-[10px] leading-none tracking-widest">*{id}*</div>
+                </>
+              ) : (
+                <div className="flex h-12 items-center justify-center rounded bg-surface-container-low text-[11px] text-on-surface-variant">
+                  Barcode terbit setelah admin konfirmasi &amp; simpan
+                </div>
+              )}
             </div>
             <div className="col-span-4 flex justify-end">
               <div className="flex h-16 w-16 items-center justify-center rounded bg-surface-container-lowest p-1 shadow-sm">
@@ -50,18 +59,18 @@ export default function LabelPreview({ form }) {
           <div className="flex items-center justify-between pt-1 font-mono text-[11px]">
             <div>
               <span className="block leading-none text-on-surface-variant">LOKASI RAK:</span>
-              <span className="font-bold text-primary">{LABEL_DEFAULTS.location}</span>
+              <span className="font-bold text-primary">{LABEL_EMPTY.location}</span>
             </div>
             <div className="text-right">
               <span className="block leading-none text-on-surface-variant">TERIMA:</span>
-              <span className="font-semibold">{LABEL_DEFAULTS.received}</span>
+              <span className="font-semibold">{LABEL_EMPTY.received}</span>
             </div>
           </div>
         </div>
         <div className="mt-1 flex flex-wrap items-center justify-between gap-space-sm">
           <div className="flex items-center gap-1.5 text-[11px] text-on-surface-variant">
             <span className="h-2 w-2 rounded-full bg-surface-tint" />
-            <span>{LABEL_DEFAULTS.printer}</span>
+            <span>{LABEL_EMPTY.printer}</span>
           </div>
           <button className="flex items-center gap-1 rounded-lg bg-surface-container-highest px-space-md py-1.5 font-label-sm text-label-sm text-primary shadow-sm transition-all hover:bg-primary hover:text-on-primary" type="button">
             <span className="material-symbols-outlined text-[16px]">print</span>

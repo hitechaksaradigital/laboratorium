@@ -16,19 +16,19 @@ export default function ClientInfo({ form, onChange }) {
     >
       <div className="grid grid-cols-1 gap-space-md md:grid-cols-2">
         <div className="md:col-span-2">
-          <Field label="Nama Perusahaan / Instansi Pemohon" action="Pilih dari Master Rekanan">
-            <TextInput icon="corporate_fare" value={form.company} onChange={(e) => onChange('company', e.target.value)} />
+          <Field label="Nama Perusahaan / Instansi Pemohon *">
+            <TextInput icon="corporate_fare" value={form.company} placeholder="Contoh: PT Contoh Industrindo" onChange={(e) => onChange('company', e.target.value)} />
           </Field>
         </div>
         <Field label="Nomor Kontrak / Order Kerja">
-          <TextInput icon="tag" value={form.contract} onChange={(e) => onChange('contract', e.target.value)} />
+          <TextInput icon="tag" value={form.contract} placeholder="Contoh: KTR-2026/ABC/0001" onChange={(e) => onChange('contract', e.target.value)} />
         </Field>
         <Field label="Narahubung Teknis (Contact Person)">
-          <TextInput icon="badge" value={form.contact} onChange={(e) => onChange('contact', e.target.value)} />
+          <TextInput icon="badge" value={form.contact} placeholder="Nama + no. HP" onChange={(e) => onChange('contact', e.target.value)} />
         </Field>
         <div className="md:col-span-2">
           <Field label="Email Pengiriman Laporan Hasil Uji (LHU / CoA)">
-            <TextInput icon="mail" type="email" value={form.email} onChange={(e) => onChange('email', e.target.value)} />
+            <TextInput icon="mail" type="email" value={form.email} placeholder="qa@perusahaan.co.id" onChange={(e) => onChange('email', e.target.value)} />
           </Field>
         </div>
       </div>

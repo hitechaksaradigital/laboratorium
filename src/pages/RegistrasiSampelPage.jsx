@@ -8,14 +8,14 @@ import CocTimeline from '../components/registrasi/CocTimeline.jsx'
 import OpsMetrics from '../components/registrasi/OpsMetrics.jsx'
 import HandoverModal from '../components/registrasi/HandoverModal.jsx'
 import SampleHistory from '../components/registrasi/SampleHistory.jsx'
-import { INTAKE_DEFAULTS, INTEGRITY_DEFAULTS, PARAMETERS } from '../data/registrasi.js'
+import { INTAKE_EMPTY, INTEGRITY_EMPTY, PARAMETERS } from '../data/registrasi.js'
 import { supabaseConfigured } from '../lib/supabase.js'
 import { createSample, fetchSamples } from '../lib/samples.js'
 
 export default function RegistrasiSampelPage() {
-  const [form, setForm] = useState(INTAKE_DEFAULTS)
-  const [checks, setChecks] = useState(INTEGRITY_DEFAULTS)
-  const [selected, setSelected] = useState(PARAMETERS.map((p) => p.id))
+  const [form, setForm] = useState(INTAKE_EMPTY)
+  const [checks, setChecks] = useState(INTEGRITY_EMPTY)
+  const [selected, setSelected] = useState([])
   const [handoverOpen, setHandoverOpen] = useState(false)
   const [toast, setToast] = useState('')
   const [rows, setRows] = useState([])
@@ -76,6 +76,9 @@ export default function RegistrasiSampelPage() {
     try {
       const saved = await createSample({ form, checks, items })
       showToast(`Tersimpan: ${saved.sample_code} (${summary.count} parameter).`)
+      setForm(INTAKE_EMPTY)
+      setChecks(INTEGRITY_EMPTY)
+      setSelected([])
       await load()
     } catch (e) {
       showToast(e.message || 'Gagal menyimpan')
