@@ -1,0 +1,107 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  darkMode: 'class',
+  content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  theme: {
+    extend: {
+      colors: {
+        'on-tertiary-fixed-variant': '#5b3f47',
+        'surface-tint': '#005ac2',
+        'on-primary': '#ffffff',
+        surface: '#faf8ff',
+        outline: '#727785',
+        'surface-variant': '#dae2fd',
+        'error-container': '#ffdad6',
+        'on-tertiary-container': '#fffbff',
+        primary: '#0058bd',
+        'secondary-fixed': '#e5deff',
+        'on-surface-variant': '#414754',
+        'on-tertiary-fixed': '#2b151c',
+        'on-error-container': '#93000a',
+        'secondary-fixed-dim': '#c8bfff',
+        'on-primary-fixed': '#001a41',
+        'on-primary-fixed-variant': '#004494',
+        'on-error': '#ffffff',
+        error: '#ba1a1a',
+        'primary-fixed-dim': '#adc6ff',
+        'primary-container': '#1470e8',
+        'tertiary-fixed-dim': '#e4bcc6',
+        background: '#faf8ff',
+        'on-surface': '#131b2e',
+        'inverse-on-surface': '#eef0ff',
+        'surface-container': '#eaedff',
+        'primary-fixed': '#d8e2ff',
+        'surface-bright': '#faf8ff',
+        'surface-dim': '#d2d9f4',
+        'on-secondary-fixed': '#1b0c53',
+        'surface-container-lowest': '#ffffff',
+        'inverse-surface': '#283044',
+        secondary: '#5f559a',
+        'on-tertiary': '#ffffff',
+        'on-background': '#131b2e',
+        'on-primary-container': '#fefcff',
+        'surface-container-highest': '#dae2fd',
+        'secondary-container': '#bdb2ff',
+        'on-secondary-container': '#4b4185',
+        'on-secondary-fixed-variant': '#473d81',
+        'surface-container-high': '#e2e7ff',
+        'inverse-primary': '#adc6ff',
+        tertiary: '#72545c',
+        'tertiary-container': '#8d6c75',
+        'on-secondary': '#ffffff',
+        'tertiary-fixed': '#ffd9e2',
+        'outline-variant': '#c2c6d6',
+        'surface-container-low': '#f2f3ff'
+      },
+      borderRadius: {
+        DEFAULT: '0.125rem',
+        lg: '0.25rem',
+        xl: '0.5rem',
+        full: '0.75rem'
+      },
+      spacing: {
+        'space-md': '0.75rem',
+        gutter: '1rem',
+        'space-xl': '2rem',
+        'margin-desktop': '2rem',
+        'space-sm': '0.5rem',
+        margin: '1rem',
+        'space-lg': '1.25rem',
+        'gutter-desktop': '1.5rem',
+        'space-xs': '0.25rem'
+      },
+      fontFamily: {
+        'label-sm': ['Inter', 'sans-serif'],
+        'headline-md': ['Plus Jakarta Sans', 'sans-serif'],
+        'headline-lg': ['Plus Jakarta Sans', 'sans-serif'],
+        'headline-xl': ['Plus Jakarta Sans', 'sans-serif'],
+        'headline-xl-mobile': ['Plus Jakarta Sans', 'sans-serif'],
+        'body-md': ['Inter', 'sans-serif'],
+        'headline-sm': ['Plus Jakarta Sans', 'sans-serif'],
+        'label-md': ['Inter', 'sans-serif'],
+        'label-lg': ['Inter', 'sans-serif'],
+        'body-sm': ['Inter', 'sans-serif'],
+        'headline-lg-mobile': ['Plus Jakarta Sans', 'sans-serif'],
+        'body-lg': ['Inter', 'sans-serif']
+      },
+      fontSize: {
+        'label-sm': ['10px', { lineHeight: '14px', letterSpacing: '0.05em', fontWeight: '600' }],
+        'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'headline-lg': ['28px', { lineHeight: '36px', letterSpacing: '-0.015em', fontWeight: '600' }],
+        'headline-xl': ['36px', { lineHeight: '44px', letterSpacing: '-0.02em', fontWeight: '700' }],
+        'headline-xl-mobile': ['28px', { lineHeight: '36px', letterSpacing: '-0.01em', fontWeight: '700' }],
+        'body-md': ['14px', { lineHeight: '20px', fontWeight: '400' }],
+        'headline-sm': ['16px', { lineHeight: '24px', fontWeight: '600' }],
+        'label-md': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' }],
+        'label-lg': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '600' }],
+        'body-sm': ['12px', { lineHeight: '16px', fontWeight: '400' }],
+        'headline-lg-mobile': ['24px', { lineHeight: '32px', letterSpacing: '-0.01em', fontWeight: '600' }],
+        'body-lg': ['16px', { lineHeight: '24px', fontWeight: '400' }]
+      },
+      boxShadow: {
+        card: '0 1px 8px rgba(0,0,0,0.04)'
+      }
+    }
+  },
+  plugins: []
+}
